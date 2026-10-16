@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>遊戲圖書館｜遊戲片採購參考資料 v1.5</title>
+<style>
+:root{
+  --bg:#fff;--ink:#1b1b1b;--muted:#858585;--faint:#c7c7c7;--line:#e8e8e8;
+  --track:#f1f1f1;--soft:#f6f6f6;--stock:#1b1b1b;--out:#b0b0b0;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box;min-width:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-wrap:anywhere;padding-bottom:90px}
+.wrap{max-width:780px;margin:0 auto;padding:0 28px}
+header{padding:62px 0 38px;border-bottom:1px solid var(--ink)}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.13em;color:var(--muted);margin:0 0 18px;text-transform:uppercase}
+h1{font-size:28px;line-height:1.3;font-weight:900;letter-spacing:.01em;margin:0}
+.summary{display:flex;gap:28px 34px;flex-wrap:wrap;margin-top:34px}
+.summary-item{min-width:126px;flex:1 1 126px;max-width:160px}
+.summary-num{font-family:var(--mono);font-size:27px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.summary-label{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+.toc{position:sticky;top:0;z-index:20;display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;background:rgba(255,255,255,.97);padding:10px 0;margin:0;border-bottom:1px solid var(--ink);scrollbar-width:thin}
+.toc a{flex:0 0 auto;display:grid;place-items:center;min-height:44px;padding:8px 12px;border:1px solid var(--ink);background:var(--bg);color:var(--ink);font-size:13px;font-weight:700;line-height:1.25;text-decoration:none;white-space:nowrap}
+.toc a:hover{background:var(--soft)}
+.toc a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+header{scroll-margin-top:76px}
+.content-section{padding:42px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:76px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:6px}
+.section-title{font-size:16px;font-weight:700;letter-spacing:.01em}
+.section-index{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500;margin-right:10px;letter-spacing:.04em}
+.section-count{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.section-desc{font-size:12.5px;line-height:1.75;color:var(--muted);margin:0 0 24px}
+.rank-list{border-top:1px solid var(--line)}
+.game-row{display:grid;grid-template-columns:30px minmax(190px,1fr) 116px 116px;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.rank-no{font-family:var(--mono);font-size:12px;color:var(--faint);font-weight:600;font-variant-numeric:tabular-nums}
+.game-name{font-size:13.5px;line-height:1.45;font-weight:500}
+.game-meta{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:4px}
+.game-code{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.status-tag{display:inline-flex;align-items:center;font-family:var(--mono);font-size:9.5px;line-height:1;padding:3px 8px;border-radius:999px;letter-spacing:.02em}
+.status-tag.stock{background:var(--stock);color:#fff}
+.status-tag.out{background:#f1f1f1;color:#9a9a9a}
+.status-tag.none{background:#fff;color:#777;border:1px solid #d3d3d3}
+.measure{display:grid;gap:5px}
+.measure-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}
+.measure-top b{font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.track{height:3px;border-radius:2px;overflow:hidden;background:var(--track)}
+.track span{display:block;height:100%;background:var(--ink)}
+footer{padding:42px 0 0}
+footer p{font-family:var(--mono);font-size:11px;color:var(--faint);margin:0}
+@media(max-width:700px){
+  body{font-size:16px;padding-bottom:60px}.wrap{padding:0 20px}header{padding:44px 0 30px}h1{font-size:23px}.summary{gap:22px 18px;margin-top:28px}.summary-item{min-width:calc(50% - 10px);max-width:none;flex:1 1 calc(50% - 10px)}
+  .toc{padding:8px 0}.toc a{min-height:42px;padding:7px 11px;font-size:12.5px}
+  .content-section{padding-top:34px}.game-row{grid-template-columns:24px minmax(0,1fr);gap:8px 10px;padding:12px 0}.rank-no{align-self:start;padding-top:2px}.game-main{grid-column:2}.measure{grid-column:2;display:grid;grid-template-columns:1fr;gap:4px}.measure-top{font-size:10.5px}.track{height:2px}
+}
+@media(max-width:390px){.wrap{padding:0 16px}.summary-item{min-width:100%;flex-basis:100%}.summary{gap:17px}.section-head{align-items:flex-start}.section-title{font-size:15px}.game-name{font-size:13.5px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{body{padding:0}.wrap{max-width:none;padding:0}header{padding-top:0}.toc{display:none}.content-section,.game-row{break-inside:avoid}.track{border:1px solid #bbb;background:#fff}.track span{background:#333}footer{padding-top:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header id="overview">
+  <p class="kicker">內部參考資料｜來源：遊戲片採購參考名單.xlsx</p>
+  <h1>遊戲圖書館｜遊戲片採購參考資料</h1>
+  <div class="summary" aria-label="資料概況"><div class="summary-item"><div class="summary-num">35</div><div class="summary-label">參考清單遊戲數</div></div><div class="summary-item"><div class="summary-num">68</div><div class="summary-label">清單內歷史中獎兌換次數合計</div></div><div class="summary-item"><div class="summary-num">23</div><div class="summary-label">在遊戲圖書館清單內</div></div><div class="summary-item"><div class="summary-num">12</div><div class="summary-label">不在遊戲圖書館清單內</div></div><div class="summary-item"><div class="summary-num">5</div><div class="summary-label">遊戲圖書館目前尚有庫存</div></div><div class="summary-item"><div class="summary-num">18</div><div class="summary-label">遊戲圖書館目前無庫存</div></div><div class="summary-item"><div class="summary-num">20</div><div class="summary-label">有歷史借閱紀錄的遊戲</div></div><div class="summary-item"><div class="summary-num">76</div><div class="summary-label">歷史借閱次數合計</div></div></div>
+</header>
+<nav aria-label="快速導覽" class="toc"><a href="#overview">資料概況</a><a href="#all">完整清單</a><a href="#stocked">尚有庫存</a><a href="#nostock">無庫存</a><a href="#nocode">不在遊戲圖書館清單內</a></nav>
+<main><section id="all" class="content-section">
+  <div class="section-head"><div class="section-title"><span class="section-index">01</span> 完整參考清單</div><div class="section-count">35 款</div></div>
+  <div class="rank-list"><article class="game-row">
+      <div class="rank-no">01</div>
+      <div class="game-main">
+        <div class="game-name">超級瑪利歐兄弟 驚奇</div>
+        <div class="game-meta"><span class="game-code">GL091</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>13</b></div>
+        <div class="track"><span style="width:100%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">02</div>
+      <div class="game-main">
+        <div class="game-name">馬力歐賽車8豪華版</div>
+        <div class="game-meta"><span class="game-code">GL009</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>7</b></div>
+        <div class="track"><span style="width:54%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>4</b></div>
+        <div class="track"><span style="width:44%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">03</div>
+      <div class="game-main">
+        <div class="game-name">NS2 咚奇剛 蕉力全開</div>
+        <div class="game-meta"><span class="game-code">GL124</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>5</b></div>
+        <div class="track"><span style="width:38%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>9</b></div>
+        <div class="track"><span style="width:100%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">04</div>
+      <div class="game-main">
+        <div class="game-name">霍格華茲的傳承</div>
+        <div class="game-meta"><span class="game-code">GL105</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>5</b></div>
+        <div class="track"><span style="width:38%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">05</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢-阿爾宙斯</div>
+        <div class="game-meta"><span class="game-code">GL049</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>5</b></div>
+        <div class="track"><span style="width:38%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">06</div>
+      <div class="game-main">
+        <div class="game-name">NS2 Pokémon Pokopia</div>
+        <div class="game-meta"><span class="game-code">GL128</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>4</b></div>
+        <div class="track"><span style="width:44%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">07</div>
+      <div class="game-main">
+        <div class="game-name">薩爾達傳說 王國之淚</div>
+        <div class="game-meta"><span class="game-code">GL078</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">08</div>
+      <div class="game-main">
+        <div class="game-name">煮過頭1+2</div>
+        <div class="game-meta"><span class="game-code">GL011</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">09</div>
+      <div class="game-main">
+        <div class="game-name">星之卡比 Wii 豪華版 中文版</div>
+        <div class="game-meta"><span class="game-code">GL111</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">10</div>
+      <div class="game-main">
+        <div class="game-name">薩爾達傳說 曠野之息</div>
+        <div class="game-meta"><span class="game-code">GL006</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">11</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢 紫</div>
+        <div class="game-meta"><span class="game-code">GL075</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">12</div>
+      <div class="game-main">
+        <div class="game-name">New超級瑪利歐兄弟U 豪華版</div>
+        <div class="game-meta"><span class="game-code">GL032</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">13</div>
+      <div class="game-main">
+        <div class="game-name">超級瑪利歐3D世界+狂怒世界</div>
+        <div class="game-meta"><span class="game-code">GL036</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">14</div>
+      <div class="game-main">
+        <div class="game-name">尼爾：自動人形</div>
+        <div class="game-meta"><span class="game-code">GL089</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">15</div>
+      <div class="game-main">
+        <div class="game-name">超級瑪利歐派對 空前盛會</div>
+        <div class="game-meta"><span class="game-code">GL122</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">16</div>
+      <div class="game-main">
+        <div class="game-name">NS2 超級瑪利歐派對 空前盛會＋空前盛會TV</div>
+        <div class="game-meta"><span class="game-code">GL123</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>6</b></div>
+        <div class="track"><span style="width:67%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">17</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢傳說Z-A</div>
+        <div class="game-meta"><span class="game-code">GL126</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>3</b></div>
+        <div class="track"><span style="width:33%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">18</div>
+      <div class="game-main">
+        <div class="game-name">女神異聞錄5</div>
+        <div class="game-meta"><span class="game-code">GL022</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">19</div>
+      <div class="game-main">
+        <div class="game-name">集合啦！動物森友會</div>
+        <div class="game-meta"><span class="game-code">GL005</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">20</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢 朱</div>
+        <div class="game-meta"><span class="game-code">GL076</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">21</div>
+      <div class="game-main">
+        <div class="game-name">NS2 寶可夢傳說Z-A</div>
+        <div class="game-meta"><span class="game-code">GL125</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>0</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>6</b></div>
+        <div class="track"><span style="width:67%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">22</div>
+      <div class="game-main">
+        <div class="game-name">薩爾達無雙災厄啟示錄</div>
+        <div class="game-meta"><span class="game-code">GL115</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>0</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">23</div>
+      <div class="game-main">
+        <div class="game-name">《FATE/SAMURAI REMNANT》中文版</div>
+        <div class="game-meta"><span class="game-code">GL093</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>0</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">24</div>
+      <div class="game-main">
+        <div class="game-name">NS2 耀西與不可思議的圖鑑</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>3</b></div>
+        <div class="track"><span style="width:33%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">25</div>
+      <div class="game-main">
+        <div class="game-name">NS2 真三國無雙 起源</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">26</div>
+      <div class="game-main">
+        <div class="game-name">NS2 卡比的馭天飛行者</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">27</div>
+      <div class="game-main">
+        <div class="game-name">空之軌跡1st</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">28</div>
+      <div class="game-main">
+        <div class="game-name">NS2 薩爾達傳說曠野之息</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">29</div>
+      <div class="game-main">
+        <div class="game-name">鬼滅之刃 火之神血風譚 2</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">30</div>
+      <div class="game-main">
+        <div class="game-name">NS2 電馭叛客2077 終極版 一般中文版</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">31</div>
+      <div class="game-main">
+        <div class="game-name">NS2 人中之龍 極 3 / 人中之龍 3 外傳 Dark Ties</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">32</div>
+      <div class="game-main">
+        <div class="game-name">索尼克賽車 交叉世界</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">33</div>
+      <div class="game-main">
+        <div class="game-name">NS2 薩爾達無雙 封印戰記</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">34</div>
+      <div class="game-main">
+        <div class="game-name">NS2 雙影奇境 Split Fiction</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">35</div>
+      <div class="game-main">
+        <div class="game-name">NS2 星之卡比 探索發現 + 星耀世界</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article></div>
+</section><section id="stocked" class="content-section">
+  <div class="section-head"><div class="section-title"><span class="section-index">02</span> 尚有庫存</div><div class="section-count">5 款</div></div>
+  <p class="section-desc">以下遊戲尚有庫存。</p>
+  <div class="rank-list"><article class="game-row">
+      <div class="rank-no">01</div>
+      <div class="game-main">
+        <div class="game-name">超級瑪利歐兄弟 驚奇</div>
+        <div class="game-meta"><span class="game-code">GL091</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>13</b></div>
+        <div class="track"><span style="width:100%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">02</div>
+      <div class="game-main">
+        <div class="game-name">NS2 咚奇剛 蕉力全開</div>
+        <div class="game-meta"><span class="game-code">GL124</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>5</b></div>
+        <div class="track"><span style="width:38%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>9</b></div>
+        <div class="track"><span style="width:100%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">03</div>
+      <div class="game-main">
+        <div class="game-name">NS2 Pokémon Pokopia</div>
+        <div class="game-meta"><span class="game-code">GL128</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>4</b></div>
+        <div class="track"><span style="width:44%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">04</div>
+      <div class="game-main">
+        <div class="game-name">星之卡比 Wii 豪華版 中文版</div>
+        <div class="game-meta"><span class="game-code">GL111</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">05</div>
+      <div class="game-main">
+        <div class="game-name">超級瑪利歐派對 空前盛會</div>
+        <div class="game-meta"><span class="game-code">GL122</span><span class="status-tag stock">有庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article></div>
+</section><section id="nostock" class="content-section">
+  <div class="section-head"><div class="section-title"><span class="section-index">03</span> 無庫存</div><div class="section-count">18 款</div></div>
+  <p class="section-desc">以下遊戲無庫存。</p>
+  <div class="rank-list"><article class="game-row">
+      <div class="rank-no">01</div>
+      <div class="game-main">
+        <div class="game-name">馬力歐賽車8豪華版</div>
+        <div class="game-meta"><span class="game-code">GL009</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>7</b></div>
+        <div class="track"><span style="width:54%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>4</b></div>
+        <div class="track"><span style="width:44%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">02</div>
+      <div class="game-main">
+        <div class="game-name">霍格華茲的傳承</div>
+        <div class="game-meta"><span class="game-code">GL105</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>5</b></div>
+        <div class="track"><span style="width:38%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">03</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢-阿爾宙斯</div>
+        <div class="game-meta"><span class="game-code">GL049</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>5</b></div>
+        <div class="track"><span style="width:38%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">04</div>
+      <div class="game-main">
+        <div class="game-name">薩爾達傳說 王國之淚</div>
+        <div class="game-meta"><span class="game-code">GL078</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">05</div>
+      <div class="game-main">
+        <div class="game-name">煮過頭1+2</div>
+        <div class="game-meta"><span class="game-code">GL011</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">06</div>
+      <div class="game-main">
+        <div class="game-name">薩爾達傳說 曠野之息</div>
+        <div class="game-meta"><span class="game-code">GL006</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">07</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢 紫</div>
+        <div class="game-meta"><span class="game-code">GL075</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>4</b></div>
+        <div class="track"><span style="width:31%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">08</div>
+      <div class="game-main">
+        <div class="game-name">New超級瑪利歐兄弟U 豪華版</div>
+        <div class="game-meta"><span class="game-code">GL032</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">09</div>
+      <div class="game-main">
+        <div class="game-name">超級瑪利歐3D世界+狂怒世界</div>
+        <div class="game-meta"><span class="game-code">GL036</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">10</div>
+      <div class="game-main">
+        <div class="game-name">尼爾：自動人形</div>
+        <div class="game-meta"><span class="game-code">GL089</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>3</b></div>
+        <div class="track"><span style="width:23%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">11</div>
+      <div class="game-main">
+        <div class="game-name">NS2 超級瑪利歐派對 空前盛會＋空前盛會TV</div>
+        <div class="game-meta"><span class="game-code">GL123</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>6</b></div>
+        <div class="track"><span style="width:67%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">12</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢傳說Z-A</div>
+        <div class="game-meta"><span class="game-code">GL126</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>3</b></div>
+        <div class="track"><span style="width:33%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">13</div>
+      <div class="game-main">
+        <div class="game-name">女神異聞錄5</div>
+        <div class="game-meta"><span class="game-code">GL022</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">14</div>
+      <div class="game-main">
+        <div class="game-name">集合啦！動物森友會</div>
+        <div class="game-meta"><span class="game-code">GL005</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">15</div>
+      <div class="game-main">
+        <div class="game-name">寶可夢 朱</div>
+        <div class="game-meta"><span class="game-code">GL076</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>1</b></div>
+        <div class="track"><span style="width:8%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">16</div>
+      <div class="game-main">
+        <div class="game-name">NS2 寶可夢傳說Z-A</div>
+        <div class="game-meta"><span class="game-code">GL125</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>0</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>6</b></div>
+        <div class="track"><span style="width:67%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">17</div>
+      <div class="game-main">
+        <div class="game-name">薩爾達無雙災厄啟示錄</div>
+        <div class="game-meta"><span class="game-code">GL115</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>0</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">18</div>
+      <div class="game-main">
+        <div class="game-name">《FATE/SAMURAI REMNANT》中文版</div>
+        <div class="game-meta"><span class="game-code">GL093</span><span class="status-tag out">無庫存</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>0</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article></div>
+</section><section id="nocode" class="content-section">
+  <div class="section-head"><div class="section-title"><span class="section-index">04</span> 不在遊戲圖書館清單內</div><div class="section-count">12 款</div></div>
+  <p class="section-desc">以下遊戲不在遊戲圖書館清單內。</p>
+  <div class="rank-list"><article class="game-row">
+      <div class="rank-no">01</div>
+      <div class="game-main">
+        <div class="game-name">NS2 耀西與不可思議的圖鑑</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>3</b></div>
+        <div class="track"><span style="width:33%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">02</div>
+      <div class="game-main">
+        <div class="game-name">NS2 真三國無雙 起源</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">03</div>
+      <div class="game-main">
+        <div class="game-name">NS2 卡比的馭天飛行者</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">04</div>
+      <div class="game-main">
+        <div class="game-name">空之軌跡1st</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>2</b></div>
+        <div class="track"><span style="width:22%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">05</div>
+      <div class="game-main">
+        <div class="game-name">NS2 薩爾達傳說曠野之息</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">06</div>
+      <div class="game-main">
+        <div class="game-name">鬼滅之刃 火之神血風譚 2</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">07</div>
+      <div class="game-main">
+        <div class="game-name">NS2 電馭叛客2077 終極版 一般中文版</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">08</div>
+      <div class="game-main">
+        <div class="game-name">NS2 人中之龍 極 3 / 人中之龍 3 外傳 Dark Ties</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">09</div>
+      <div class="game-main">
+        <div class="game-name">索尼克賽車 交叉世界</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">10</div>
+      <div class="game-main">
+        <div class="game-name">NS2 薩爾達無雙 封印戰記</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">11</div>
+      <div class="game-main">
+        <div class="game-name">NS2 雙影奇境 Split Fiction</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article><article class="game-row">
+      <div class="rank-no">12</div>
+      <div class="game-main">
+        <div class="game-name">NS2 星之卡比 探索發現 + 星耀世界</div>
+        <div class="game-meta"><span class="status-tag none">不在清單內</span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史客借</span><b>—</b></div>
+        <div class="track"><span style="width:0%"></span></div>
+      </div>
+      <div class="measure">
+        <div class="measure-top"><span>歷史中獎兌換</span><b>1</b></div>
+        <div class="track"><span style="width:11%"></span></div>
+      </div>
+    </article></div>
+</section></main>
+<footer><p>資料來源：使用者提供《遊戲片採購參考名單.xlsx》</p></footer>
+</div>
+</body>
+</html>
